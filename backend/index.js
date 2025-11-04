@@ -21,3 +21,6 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
+
+const casRoutes = require('./routes/cas');
+app.use('/api/cas', casRoutes);
