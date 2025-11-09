@@ -1,6 +1,7 @@
 const pdf = require("pdf-parse");
 const fs = require("fs");
 const path = require("path");
+const casParser = require("../utils/casParser");
 
 exports.parseCAS = async (req, res) => {
   try {
@@ -15,12 +16,15 @@ exports.parseCAS = async (req, res) => {
     const textSample = data.text.substring(0, 500);
 
     // TODO: Add parsing functions for folios, AMCs, investments, etc.
+    const parsedCAS = casParser(data.text);
+
 
     res.json({
       status: 'success',
       pages,
       textSample,
-      fullText: data.text, // remove or truncate for production
+      fullText: data.text,
+      cas: parsedCAS, // remove or truncate for production
       message: 'PDF parsed successfully. Insert CAS analysis logic here.'
     });
 
